@@ -6,10 +6,10 @@ void main()
 FILE *image, *outputImage_GrayScale, *outputImage_Flip_vertical, 
 *outputImage_Flip_horizontal;
 //image = fopen("gtr35-HD.bmp", "rb"); // Imagen normal mas de (700x700) a transformar
-image = fopen("vango.bmp", "rb"); 
-outputImage_GrayScale = fopen("img2outv.bmp", "wb"); // Imag
-outputImage_Flip_vertical = fopen("vangover.bmp", "wb"); 
-outputImage_Flip_horizontal = fopen("vangohor.bmp", "wb"); // Imagen 
+image = fopen("Kirby.bmp", "rb"); 
+outputImage_GrayScale = fopen("img2outkir.bmp", "wb"); // Imag
+outputImage_Flip_vertical = fopen("Kirbver.bmp", "wb"); 
+outputImage_Flip_horizontal = fopen("Kirbhor.bmp", "wb"); // Imagen 
 long ancho;
 long alto;
 unsigned char r, g, b; // Pixels
