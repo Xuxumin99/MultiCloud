@@ -260,7 +260,7 @@ void printArr(unsigned char * array, unsigned int size, unsigned int EPR, unsign
 }
 
 int main(){
-  BMP_gray(BMP_open("700.bmp"));
+  BMP_gray(BMP_open("2000.bmp"));
   // BMP_gray(BMP_open("hollow.bmp"));
   BMP_horFlip(BMP_open("GrayScale.bmp"));
   BMP_verFlip(BMP_open("GrayScale.bmp"));

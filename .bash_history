@@ -298,3 +298,50 @@ vi Act1.3.c
 vi Act1.3.c
 gcc -fopenmp Act1.3.c -o act13
 ./act13
+ls
+mkdir img700
+ls
+mv -i Blur03.bmp img700
+ls
+mv -i Blur05.bmp img700
+mv -i Blur07.bmp img700
+mv -i Blur09.bmp img700
+mv -i Blur11.bmp img700
+mv -i Blur13.bmp img700
+mv -i Blur15.bmp img700
+mv -i Blur17.bmp img700
+mv -i Blur19.bmp img700
+mv -i Blur21.bmp img700
+mv -i Blur23.bmp img700
+ls
+mv -i GrayScale.bmp img700
+mv -i HorizontalRot.bmp img700
+mv -i VerticalRot.bmp img700
+mv -i Rblur03.bmp img700
+mv -i Rblur05.bmp img700
+mv -i Rblur07.bmp img700
+mv -i Rblur09.bmp img700
+mv -i Rblur11.bmp img700
+mv -i Rblur13.bmp img700
+mv -i Rblur15.bmp img700
+mv -i Rblur17.bmp img700
+mv -i Rblur19.bmp img700
+mv -i Rblur21.bmp img700
+mv -i Rblur23.bmp img700
+ls
+git add .
+git comment -m "Carpeta y movimiento 700"
+git commit -m "Carpeta y movimiento 700"
+git push origin main
+git push
+git pull 
+ls
+git push
+ls
+vi Act2.1.c
+vi Act2.2.c
+gcc -fopenmp Act2.1.c -o act21
+./act21
+./act22
+ls
+./act22
