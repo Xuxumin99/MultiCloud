@@ -379,3 +379,11 @@ ls
 git add .
 git commit -m "Carpeta 2000"
 git push
+ls
+ls
+mv -i 700Gif.gif img700
+mv -i 700RotGif.gif img700
+ls
+git add .
+git commit -m "Gif agregados"
+git push
