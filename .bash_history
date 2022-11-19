@@ -345,3 +345,37 @@ gcc -fopenmp Act2.1.c -o act21
 ./act22
 ls
 ./act22
+ld
+ls
+mkdir img2000
+ls
+mv -i GrayScale.bmp img2000
+mv -i HorizontalRot.bmp img2000
+mv -i VerticalRot.bmp img2000
+mv -i Blur03.bmp img2000
+mv -i Blur05.bmp img2000
+mv -i Blur07.bmp img2000
+mv -i Blur09.bmp img2000
+mv -i Blur11.bmp img2000
+mv -i Blur13.bmp img2000
+mv -i Blur15.bmp img2000
+mv -i Blur17.bmp img2000
+mv -i Blur19.bmp img2000
+mv -i Blur21.bmp img2000
+mv -i Blur23.bmp img2000
+mv -i Rblur03.bmp img2000
+mv -i Rblur05.bmp img2000
+mv -i Rblur06.bmp img2000
+mv -i Rblur07.bmp img2000
+mv -i Rblur09.bmp img2000
+mv -i Rblur11.bmp img2000
+mv -i Rblur13.bmp img2000
+mv -i Rblur15.bmp img2000
+mv -i Rblur17.bmp img2000
+mv -i Rblur19.bmp img2000
+mv -i Rblur21.bmp img2000
+mv -i Rblur23.bmp img2000
+ls
+git add .
+git commit -m "Carpeta 2000"
+git push
