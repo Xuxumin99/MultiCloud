@@ -1,21 +1,16 @@
 #include <stdio.h>
 #include <omp.h>
-#include <math.h>
-#define NUM_THREADS 18
+#define NUM_THREADS 18 //Cambiar los threads
 int main(){
-    double tiempo, t1, t2;
-    double divisiones = 100000000; //10 ^ 8
-    double divisor = 1.0 / divisiones;
-    double total = 0.0;
+    double tiempo;
     omp_set_num_threads(NUM_THREADS);
     const double startTime = omp_get_wtime();
-    t1 = omp_get_wtime();
     #pragma omp parallel
     {
-        for (double i = 0.0; i < 1.0; i = i + divisor){
-        double funcion = (4.0 / (1.0 + pow(i,2))) * divisor;
-        total = total + funcion;
-        }
+        int ID = omp_get_thread_num();
+        printf("Procesadores (%d)", ID);
+        printf("Multiples (%d)", ID);
+        printf(",en accion --- %d\n", ID);
     }
     const double endTime = omp_get_wtime();
     tiempo = endTime-startTime;
