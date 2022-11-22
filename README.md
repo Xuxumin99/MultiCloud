@@ -5,7 +5,7 @@ Con el propósito de identificar y señalar las diferencias que existen entre eq
 
 
 ### WIKI 
-https://github.com/Xuxumin99/MultiCloud.wiki.git
+[https://github.com/Xuxumin99/MultiCloud.wiki](https://github.com/Xuxumin99/MultiCloud/wiki)
 
 A continuacion se describe la configuración de la maquina virtual en el servicio de Google Cloud.
 &nbsp;
