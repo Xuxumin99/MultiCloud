@@ -4,7 +4,7 @@
 Con el propósito de identificar y señalar las diferencias que existen entre equipos de cómputo, procesadores, procesamiento y tiempos de ejecución es que se presenta el siguiente proyecto. Como parte de nuestras actividades a través del semestre se contabilizaron tiempos de ejecución de múltiples ejercicios, los cuales serán puestos a comparación con una maquina virtual prevista por Google Cloud la cual ejecutará los ejercicios selectos para demostrar las diferencias entre la computadora personal y dicho servicio.
 
 ### WIKI 
-[https://github.com/Xuxumin99/MultiCloud.wiki.git](https://github.com/Xuxumin99/MultiCloud/wiki)
+[https://github.com/Xuxumin99/MultiCloud.wiki](https://github.com/Xuxumin99/MultiCloud/wiki)
 
 A continuacion se describe la configuración de la maquina virtual en el servicio de Google Cloud.
 &nbsp;
