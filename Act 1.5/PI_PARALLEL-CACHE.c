@@ -1,44 +1,39 @@
 #include <stdio.h>
-#include "omp.h"
-#include <math.h>
-
-static long num_pasos = 1000000;
+#include <omp.h>
+static long numpasos = 100000000;
 double paso;
-#define NUM_THREADS 6
+#define NUM_THREADS 400
 
-//PARA MEDIR VELOCIDAD DE LECTURA-ESCRITURA CACHE
 void main()
 {
     int i, nthreads;
     double pi, sum[NUM_THREADS], t1, t2, tiempo;
-    paso = 1.0 / num_pasos;
+    paso = 1.0/numpasos;
     omp_set_num_threads(NUM_THREADS);
     const double startTime = omp_get_wtime();
     t1 = omp_get_wtime();
 
 #pragma omp parallel
+{
+    int i, id, nthrds;
+    double x;
+    id = omp_get_thread_num();
+    nthrds = omp_get_num_threads();
+    if (id == 0) nthreads = nthrds;
+
+    for (i = id, sum[id] = 0.0; i < numpasos; i = i + nthrds)
     {
-        int i, id, nthrds;
-        double x;
-        id = omp_get_thread_num();
-        nthrds = omp_get_num_threads();
-        if (id == 0)
-            nthreads = nthrds;
-
-        for (i = id, sum[id] = 0.0; i < num_pasos; i = i + nthrds)
-        {
-            x = (i + 0.5) * paso;
-            sum[id] += log((4.0 / (1.0 + x * x)));
-        }
+        x = (i + 0.5) * paso;
+        sum[id] += 4.0/(1.0 + (x*x));
     }
+}
 
-    for (i = 0, pi = 0.0; i < nthreads; i++)
-    {
-        pi += sum[i] * paso;
-    }
+for (i = 0, pi = 0.0; i < nthreads; i++)
+    pi += sum[i] * paso;
 
-    t2 = omp_get_wtime();
-    tiempo = t2 - t1;
-    printf(" pi = (%lf)\n ", pi);
-    printf(" tomo (%lf) segundos\n ", tiempo);
+const double endTime = omp_get_wtime();
+tiempo = t2-t1;
+
+printf("Pi = %lf\n", pi);
+printf("Tiempo total = %lf\n", (endTime - startTime));
 }

@@ -5,8 +5,8 @@
 void main()
 {
     FILE *image, *outputImage_GrayScale, *outputImage_Flip_vertical, *outputImage_Flip_horizontal;
-    //image = fopen("gtr35-HD.bmp", "rb");  // Imagen normal mas de (700x700) a transformar
-    image = fopen("gtr35-4K.bmp", "rb"); // Imagen  gran formato (más de 2000 pixeles en ancho o alto) a transformar
+    image = fopen("gtr35-HD.bmp", "rb");  // Imagen normal mas de (700x700) a transformar
+    //image = fopen("gtr35-4K.bmp", "rb"); // Imagen  gran formato (más de 2000 pixeles en ancho o alto) a transformar
     outputImage_GrayScale = fopen("img2_GrayScale.bmp", "wb"); // Imagen transformada a escala de grises
     outputImage_Flip_vertical = fopen("img2_Flip_vertical.bmp", "wb"); // Imagen transformada rotada verticalmente
     outputImage_Flip_horizontal = fopen("img2_Flip_horizontal.bmp", "wb"); // Imagen transformada rotada horizontalmente
@@ -15,6 +15,8 @@ void main()
     unsigned char r, g, b; // Pixels
     unsigned char pixel;
     omp_set_num_threads(10);
+
+    double t1, t2, tiempo1, tiempo2, tiempo3;
 
     unsigned char cabecera[54];
     for (int i = 0; i < 54; i++)
@@ -26,12 +28,12 @@ void main()
     }
 
     ancho = (long)cabecera[20] * 65536 + (long)cabecera[19] * 256 + (long)cabecera[18];
-    alto = (long)cabecera[24] * 65536 + (long)cabecera[23] * 256 + (long)cabecera[22];
+    alto = (abs)((long)(cabecera[25] << 24) + (long)(cabecera[24] << 16) + (long)(cabecera[23] << 8) + (long)(cabecera[22] << 0));
     printf("largo img %li\n", alto);//NOT OK
     printf("ancho img %li\n", ancho);//OK
 
     //DIMENSIONES MANUALES
-    int alto_N = 2757;//650 / 2757
+    int alto_N = alto;//650 / 2757
     int ancho_N = ancho; //1200 / 4096
     long dimension_vector =  ancho_N * alto_N; //Cantidad total de pixeles RGB
 
@@ -69,6 +71,7 @@ void main()
             tmp_pixel_vector [i+2] = pixel;
         }
 
+        t1 = omp_get_wtime();
         //Imagen en escala de grises sin rotacion
         #pragma omp for schedule(dynamic) 
         for (int i = 0; i < dimension_vector*3; i++)
@@ -77,7 +80,11 @@ void main()
             fputc(tmp_pixel_vector[i+1], outputImage_GrayScale);
             fputc(tmp_pixel_vector[i+2], outputImage_GrayScale);
         }
+        t2 = omp_get_wtime();
+        tiempo1 = t2 - t1;
 
+
+        t1 = omp_get_wtime();
         //Rotado horizontalmente sobre su eje de simetria
         #pragma omp for schedule(dynamic) 
         for (int i = dimension_vector; i > 0; i--) 
@@ -86,7 +93,11 @@ void main()
             fputc(tmp_pixel_vector[(i+1)], outputImage_Flip_horizontal);
             fputc(tmp_pixel_vector[(i+2)], outputImage_Flip_horizontal);
         }
+        t2 = omp_get_wtime();
+        tiempo2 = t2 - t1;
 
+
+        t1 = omp_get_wtime();
         //Rotado verticalmente sobre su eje de simetria
         #pragma omp for schedule(dynamic) collapse(2)
         for (int i = 0; i < (alto_N); i++)
@@ -102,7 +113,14 @@ void main()
                 fputc(tmp_flip_V_vector[(j+(ancho_N*i))+2], outputImage_Flip_vertical);
             }
         }
+
+        t2 = omp_get_wtime();
+        tiempo3 = t2 - t1;
     }
+
+    printf(" Imagen en escala de grises sin rotacion tomo (%lf) segundos\n ", tiempo1);
+    printf(" Imagen rotada horizontalmente sobre su eje de simetria tomo (%lf) segundos\n ", tiempo2);
+    printf(" Imagen rotada verticalmente sobre su eje de simetria tomo (%lf) segundos\n ", tiempo3);
 
     free(tmp_pixel_vector);
     free(tmp_flip_V_vector);

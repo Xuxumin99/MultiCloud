@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <omp.h>
 #include <math.h>
-// #include <malloc.h>
+#include <malloc.h>
 
 FILE *fptr;
 
@@ -99,7 +99,8 @@ double** euler_method(int N){
 }
 
 void writeArr(double** arr, FILE *fp){
-    size_t size = malloc_usable_size(*arr)/sizeof arr[0][0];
+    //size_t size = malloc_usable_size(*arr)/sizeof arr[0][0];
+  size_t size = _msize(*arr)/sizeof arr[0][0];
     printf("%ld\n", size);
     fprintf(fp, "Datos que encuentra el metodo de Euler:\nN\t\tX\t\t\t  Y\n");
     for(int j = 0; j < size; j++){
